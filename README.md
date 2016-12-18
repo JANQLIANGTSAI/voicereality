@@ -9,12 +9,13 @@
  * All rights reserved.
  * -----------------------------------------------
  *
- * A Voice-Actionable (speech recognition) Multi-players Gamingfied 
- * Virtual Reality Learning Environment for Special Education
+ * A Voice-Actionable (speech recognition)/Virtual Reality 
+ * Multi-players Gamingfied Learning Environment designed
+ * for Special Education
  *
  * -----------------------------------------------
  * Server: 
- *   https://github.com/JANQLIANGTSAI/expresssocketiopugbootstrap
+ *   https://github.com/JANQLIANGTSAI/voicereality
  * WebVR:
  *   AFRAME.io (https://aframe.io/)
  * Voice Recognization
