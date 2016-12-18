@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      
+    <!--
+        Voice Reality
+        https://github.com/JANQLIANGTSAI/voicereality
+        Copyright 2016-present, Max J. Tsai
+        All rights reserved.
+    -->
+
+      <meta charset="utf-8">
+    <title>Hello, World! • A-Frame</title>
+    <meta name="description" content="Hello, World! • A-Frame">
+    <script src="/aframe/aframe.js"></script>
+    <script>
+        document.getElementById("max").radius = "10";
+    </script>
+  </head>
+  <body>
+    <a-scene>
+
+      <a-sphere position="0 2 -1" radius="1.25" color="#EF2D5E"></a-sphere>
+      <a-box position="-1 0.5 1" rotation="0 45 0" width="1" height="1" depth="1"  color="#4CC3D9"></a-box>
+      <a-cylinder position="1 0.75 1" radius="0.5" height="1.5" color="#FFC65D"></a-cylinder>
+      <a-plane src="max.jpg" rotation="-90 0 0" width="4" height="4" color="#7BC8A4"></a-plane>
+
+      <a-sky color="#ECECEC"></a-sky>
+      <a-entity position="0 0 3.8">
+        <a-camera></a-camera>
+      </a-entity>
+    </a-scene>
+
+      <script>
+        var scene = document.querySelector('a-scene');
+        if (scene.hasLoaded) {
+          run();
+        } else {
+          scene.addEventListener('loaded', run);
+        }
+        function run () {
+            
+          var entityA = scene.querySelector('a-sphere');
+          var entityB = scene.querySelector('a-box');
+          var entityC = scene.querySelector('a-cylinder');
+          var i = 2.1;
+          var j = -1.1;
+          var k = 1.1;
+          var posA = "0 "+i+" -1";
+          var posB = j+" 0.5 1";
+          var posC = k+" 0.75 1";
+          setInterval(
+              function(){ 
+                  // alert (pos);
+                  entityA.setAttribute('position', posA);
+                  entityB.setAttribute('position', posB);
+                  entityC.setAttribute('position', posC);
+                  i = i + 0.1;
+                  j = j - 0.1;
+                  k = k + 0.1;
+                  posA = "0 "+i+" -1";
+                  posB = j+" 0.5 1";
+                  posC = k+" 0.75 1";
+                  
+              }, 
+          1000);
+          
+        }
+     </script> 
+  </body>
+</html>

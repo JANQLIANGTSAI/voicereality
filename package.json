@@ -1,0 +1,26 @@
+{
+  "name": "voicereality",
+  "version": "0.0.0",
+  "description": "Max's Node JS template with Express, Socket.io, Pug, Pug-Bootstrap, and SQLite",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node_modules/.bin/nodemon app.js"
+  },
+  "author": "mt8168@gmail.com",
+  "private": "true",
+  "license": "BSD-3-Clause-Attribution",
+  "dependencies": {
+    "aframe": "^0.3.2",
+    "body-parser": "^1.15.2",
+    "bootstrap": "^3.3.7",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.14.0",
+    "multer": "^1.2.0",
+    "pug": "^2.0.0-beta6",
+    "pug-bootstrap": "0.0.3",
+    "serve-favicon": "^2.3.0",
+    "socket.io": "^1.5.1",
+    "sqlite3": "^3.1.6"
+  }
+}

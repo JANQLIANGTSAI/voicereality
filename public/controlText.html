@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <!--
+        Voice Reality
+        https://github.com/JANQLIANGTSAI/voicereality
+        Copyright 2016-present, Max J. Tsai
+        All rights reserved.
+    -->
+    
+    <meta charset="utf-8">
+    <title>Voice Actionable • VR • Multiplayer</title>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+
+    
+    <script src="/bootstrap/js/bootstrap.min.js"></script>
+    <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/bootstrap/css/cover.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->    
+        
+    <script>
+        $(function(){
+
+            var iosocket = io.connect();
+            iosocket.on('connect', function () {
+
+                // $('#incomingMsg').append($('<li>Connected</li>'));
+                $('#incomingMsg').val("Connected");
+
+                iosocket.on('message', function(message) {
+                    //$('#incomingMsg').append($('<li></li>').text(message));
+                    $('#incomingMsg').val(message);
+
+                });
+
+                iosocket.on('disconnect', function() {
+                    // $('#incomingMsg').append('<li>Disconnected</li>');
+                    $('#incomingMsg').val("Disconnected");
+                });
+
+            });
+
+            $('#outgoingMsg').keypress(function(event) {
+                if(event.which == 13) {
+                    event.preventDefault();
+                    iosocket.send($('#outgoingMsg').val());
+                    // $('#incomingMsg').append($('<li></li>').text($('#outgoingMsg').val()));
+                    $('#incomingMsg').val( $('#outgoingMsg').val() );
+                    $('#outgoingMsg').val('');
+                }
+            });
+        });
+    </script>
+    
+</head>
+
+<body>
+    
+
+<div class="site-wrapper">
+
+      <div class="site-wrapper-inner">
+
+        <div class="cover-container">
+
+          <div class="masthead clearfix">
+            <div class="inner">
+                
+<h3 class="masthead-brand"><span class="glyphicon glyphicon-home"></span> Max's Mulitple Player - VR</h3>
+                
+              <nav>
+                <ul class="nav masthead-nav">
+                  <li><a href="/">Home</a></li>
+                  <li class="active"><a href="#">Controller</a></li>
+                  <li><a href="/mpVR.html">MP•VR</a></li>
+                  <li><a href="/animation.html">Animated•VR</a></li>
+                </ul>
+              </nav>
+            </div>
+          </div>
+
+          <div class="inner cover">
+            <h1 class="cover-heading">Voice Actionable Virtual Reality</h1>
+            <p class="lead">C O N T R O L L E R</p>
+            <p class="lead">
+                
+                
+                <div class="container-fluid">
+
+                    <br/><br/>
+
+                    Current sphere (Y-asix) is: 
+                    <!-- <ul id="incomingMsg"></ul> -->
+                    <input type="text" style="color: white; background: gray; border-color:gray;" id="incomingMsg">
+
+                    <br /><hr style="width:360px; "/>
+
+                    Move sphere (Y-asix) to: 
+                    <input type="text" style="color: black;" id="outgoingMsg">
+                </div>
+
+          </div>
+
+          <div class="mastfoot">
+            <div class="inner">
+              <p>Created by Max Tsai / Powered by WebVR • A-Frame.</p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+    
+
+</body>
+
+</html>

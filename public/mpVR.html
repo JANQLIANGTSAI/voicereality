@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!--
+        Voice Reality
+        https://github.com/JANQLIANGTSAI/voicereality
+        Copyright 2016-present, Max J. Tsai
+        All rights reserved.
+    -->
+    
+    <meta charset="utf-8">
+    <title>Voice Actionable • VR • Multiplayer</title>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    
+    <script src="/aframe/aframe.js"></script>
+
+</head>
+
+<body>
+    
+    <a-scene>
+
+      <a-sphere rotation="15 -15 0" position="0 2 1" radius="0.5" color="#EF2D5E"></a-sphere>
+      <!-- Max Note: Use for illustrate positioning **
+        <a-box position="-1.25 0.75 1" rotation="-15 60 0" width="1" height="1" depth="1"  color="#ECECEC"></a-box>
+        <a-cylinder position="1.25 1 0.5" radius="0.5" height="1.5" color="#FFC65D"></a-cylinder>
+      -->
+      <a-plane src="images/Basketball_court_dimensions.png" rotation="-90 0 0" width="6" height="4" -color="#7BC8A4"></a-plane>
+
+      <a-sky color="#4CC3D9"></a-sky>
+      <a-entity position="0 0 3.8">
+        <a-camera></a-camera>
+      </a-entity>
+    </a-scene>
+    
+    <script>
+        var scene = document.querySelector('a-scene');
+        var yAsix = document.querySelector('outgoingMsg');
+        
+        if (scene.hasLoaded) {
+          run();
+        } else {
+          scene.addEventListener('loaded', run);
+        }
+        
+        function run () {
+            var iosocket = io.connect();
+            var entityA = scene.querySelector('a-sphere');
+            
+            iosocket.on('connect', function () {
+
+                /*
+                $('#incomingMsg').append($('<li>Connected</li>'));
+                */
+                
+                iosocket.on('message', function(message) {
+                    // $('#incomingMsg').append($('<li></li>').text(message));
+                    
+                    var posA = "0 "+message+" -1";
+                    // alert( posA );
+                    entityA.setAttribute('position', posA);
+                    
+                });
+
+                /*
+                iosocket.on('disconnect', function() {
+                    $('#incomingMsg').append('<li>Disconnected</li>');
+                });
+                */
+
+            });
+
+            /*
+            $('#outgoingMsg').keypress(function(event) {
+                if(event.which == 13) {
+                    event.preventDefault();
+                    iosocket.send($('#outgoingMsg').val());
+                    $('#incomingMsg').append($('<li></li>').text($('#outgoingMsg').val()));
+                    
+                    var posA = "0 "+document.getElementById("outgoingMsg").value+" -1";
+                    alert( document.getElementById("outgoingMsg").value );
+                    entityA.setAttribute('position', posA);
+                    
+                    $('#outgoingMsg').val('');
+
+                }
+            });
+            */
+        };
+        
+    </script>
+
+</body>
+
+</html>

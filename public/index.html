@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!--
+        Voice Reality
+        https://github.com/JANQLIANGTSAI/voicereality
+        Copyright 2016-present, Max J. Tsai
+        All rights reserved.
+    -->
+    
+    <meta charset="utf-8">
+    <title>Voice Actionable • VR • Multiplayer</title>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+
+    
+    <script src="/bootstrap/js/bootstrap.min.js"></script>
+    <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/bootstrap/css/cover.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->    
+        
+    <script>
+        $(function(){
+
+            var iosocket = io.connect();
+            iosocket.on('connect', function () {
+
+                // $('#incomingMsg').append($('<li>Connected</li>'));
+                $('#incomingMsg').val("Connected");
+
+                iosocket.on('message', function(message) {
+                    //$('#incomingMsg').append($('<li></li>').text(message));
+                    $('#incomingMsg').val(message);
+
+                });
+
+                iosocket.on('disconnect', function() {
+                    // $('#incomingMsg').append('<li>Disconnected</li>');
+                    $('#incomingMsg').val("Disconnected");
+                });
+
+            });
+
+            $('#outgoingMsg').keypress(function(event) {
+                if(event.which == 13) {
+                    event.preventDefault();
+                    iosocket.send($('#outgoingMsg').val());
+                    // $('#incomingMsg').append($('<li></li>').text($('#outgoingMsg').val()));
+                    $('#incomingMsg').val( $('#outgoingMsg').val() );
+                    $('#outgoingMsg').val('');
+                }
+            });
+        });
+    </script>
+    
+</head>
+
+<body>
+    
+
+<div class="site-wrapper">
+
+      <div class="site-wrapper-inner">
+
+        <div class="cover-container">
+
+          <div class="masthead clearfix">
+            <h2 class="cover-heading">Max's Voice (Virtual) Reality - Controller</h2>
+            <p>
+            <a href="mpVR.html" target="_blank">Full VR View</a> | 
+            <a href="about.html" target="_blank">About</a> |
+            <a href="animation.html" target="_blank">Animated Sample</a><br/>
+                <p style="color: gray;">** <em>open this</em> [ <a href="mpVR.html" target="_blank"><b>VIEWER'S LINK</b></a> ] <em>in different browsers for multiplayer experience</em> **</p>
+            </p>
+            
+            <div class="inner">
+                
+                <iframe src="/mpVR.html"></iframe><br/>
+                P R E V I E W • C O N S O L E<br/>
+                
+            </div>
+          </div>
+
+          <div class="inner cover">
+              <br/><br/><br/><br/><br/><br/><br/><br/>
+              <hr style="width:640px;" />
+            <p class="lead">
+                
+                
+                <div class="container-fluid">
+                    <br/>
+                    Current sphere (Y-asix) is: 
+                    <!-- <ul id="incomingMsg"></ul> -->
+                    <input type="text" style="color: white; background: gray; border-color:gray;" id="incomingMsg">
+
+                    <br /><hr style="width:360px; border-top: 1px dashed #8c8b8b;"/>
+
+                    Move sphere (Y-asix) to: 
+                    <input type="text" style="color: black;" id="outgoingMsg">
+                    <br/><em style="color: gray;">enter a number form -1 to 5</em>
+                    
+                    <br/><hr style="width:360px; border-top: 1px dashed #8c8b8b;"/>
+
+                    <br/> 
+                </div>
+
+          </div>
+
+          <div class="mastfoot">
+            <div class="inner">
+              <p>
+<a href="#"><b>Max Tsai's Voice Reality - Animate your 3D Objects in a Multi-Player VR World.</b></a><br/>
+<em>This project is to create a simple Voice-Actionable (speech recognition) Multi-players Virtual Reality Learning platform for Special Education students for enhancing learner experience thru Gamification.</em><br/>
+<a href="https://github.com/JANQLIANGTSAI/voicereality" target="_blank">VoiceReality project at Github</a><br/>
+                  
+              </p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+    
+
+</body>
+
+</html>
